@@ -1,0 +1,464 @@
+//https://www.codeguru.com/csharp/.net/net_data/using-sqlite-in-a-c-application.html
+using System;
+using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace SQLiteDemo
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+
+            string WorkoutType = null;
+
+            SQLiteConnection sqlite_conn_strength;
+            sqlite_conn_strength = new SQLiteConnection("Data Source=StrengthDB.db; Version = 3; New = True; Compress = True; ");
+            sqlite_conn_strength.Open();
+            WorkoutType = "Strength";
+            CreateTable(sqlite_conn_strength, WorkoutType);
+
+            ReadData(sqlite_conn_strength);
+
+
+
+            SQLiteConnection sqlite_conn_cardio;
+            sqlite_conn_cardio = new SQLiteConnection("Data Source=CardioDB.db; Version = 3; New = True; Compress = True; ");
+            sqlite_conn_cardio.Open();
+            WorkoutType = "Cardio";
+            CreateTable(sqlite_conn_strength, WorkoutType);
+
+            SQLiteConnection sqlite_conn_balance;
+            sqlite_conn_balance = new SQLiteConnection("Data Source=BalanceDB.db; Version = 3; New = True; Compress = True; ");
+            sqlite_conn_balance.Open();
+            WorkoutType = "Balance";
+            CreateTable(sqlite_conn_strength, WorkoutType);
+
+
+
+
+            int Choice1 = 0;
+            int Choice2 = 0;
+
+            L1andL2Prompt(ref Choice1, ref Choice2);
+
+            int Choice3 = 0;
+            int Choice4 = 0;
+
+            L3andL4Prompt(ref Choice1, ref Choice2, ref Choice3, ref Choice4);
+
+        
+
+
+            
+           
+            InsertData(sqlite_conn_strength);
+            ReadData(sqlite_conn_strength);
+
+            
+            InsertData(sqlite_conn_cardio);
+            ReadData(sqlite_conn_cardio);
+
+
+
+
+
+        }
+
+        static SQLiteConnection CreateConnectionStrength()
+        {
+
+            SQLiteConnection sqlite_conn_strength;
+            // Create a new database connection:
+            sqlite_conn_strength = new SQLiteConnection("Data Source=StrengthDB.db; Version = 3; New = True; Compress = True; ");
+            sqlite_conn_strength.Open();
+            return sqlite_conn_strength;
+            // Open the connection:
+
+       
+           // try
+           // {
+           //     sqlite_conn_strength.Open();
+           // }
+           // catch (Exception ex)
+           // {
+
+           // }
+           // return sqlite_conn_strength;
+
+           //try
+           // {
+           //     sqlite_conn_cardio.Open();
+           // }
+           // catch (Exception ex)
+            //{
+
+            //}
+            //return sqlite_conn_cardio;
+        }
+
+        static SQLiteConnection CreateConnectionCardio()
+        {
+            SQLiteConnection sqlite_conn_cardio;
+            sqlite_conn_cardio = new SQLiteConnection("Data Source=CardioDB.db; Version = 3; New = True; Compress = True;");
+            sqlite_conn_cardio.Open();
+            return sqlite_conn_cardio;
+        }
+
+        static void CreateTable(SQLiteConnection AnyConnectionObject, string WorkoutType)
+        {
+
+
+            //string Createsql1 = "CREATE TABLE if not exists SampleTable1(Col1 VARCHAR(20), Col2 INT)";
+
+           
+                string Createsql = "CREATE TABLE if not exists SampleTable(Col1 VARCHAR(20), Col2 INT)";
+                SQLiteCommand sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            //sqlite_cmd.ExecuteNonQuery();
+
+
+
+            Createsql = "DROP TABLE if exists Pushups";
+           
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+            Createsql = "CREATE TABLE if not exists Pushups(ID INT NOT NULL, Date DATE, Repetitions DECIMAL(3,1), Sets INT, PRIMARY KEY(ID))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            // 12:45:45 PM
+            SQLiteCommand VarQuery;
+            //// VarQuery = AnyConnectionObject.CreateCommand();
+            Createsql = "INSERT INTO Pushups values(1, datetime('now'), 3.5, 4)";
+            VarQuery = new SQLiteCommand(Createsql, AnyConnectionObject);
+            VarQuery.ExecuteNonQuery();
+
+
+
+            //sqlite_cmd = new SQLiteCommand(Createsql, sqlite_conn_cardio);
+
+            //Drop tables if created before
+            //string Deletesql = "DROP TABLE SampleTable";
+            //string Deletesql1 = "DROP TABLE SampleTable1";
+
+            //*this one sqlite_cmd = conn.CreateCommand();
+
+            //sqlite_cmd.CommandText = Deletesql;
+            //sqlite_cmd.ExecuteNonQuery();
+            //sqlite_cmd.CommandText = Deletesql1;
+            //sqlite_cmd.ExecuteNonQuery();
+
+
+            //sqlite_cmd = conn.CreateCommand();
+
+            //sqlite_cmd.CommandText = Createsql;
+
+            // sqlite_cmd.CommandText = Createsql1;
+
+            //string Createsql1 = "CREATE TABLE if not exists SampleTable1(Col1 VARCHAR(20), Col2 INT)";
+            //sqlite_cmd = new SQLiteCommand(Createsql1, AnyConnectionObject);
+            //sqlite_cmd.ExecuteNonQuery();
+
+        }
+
+        public static int ReadInt32(string value)
+        {
+            int val = -1;
+            if (!int.TryParse(value, out val))
+                return -1;
+            return val;
+        }
+
+
+
+
+
+
+        static void InsertData(SQLiteConnection AnyConnectionObject)
+        {
+
+            //int rc;
+            //sqlite3* db;
+            //sqlite3_stmt* stmt = null;
+
+            string egtext = "Example text";
+            Console.Write("Enter value for egtext:");
+            egtext = Console.ReadLine();
+            int a = 1;
+            Console.Write("Enter value for a: ");
+           
+            a = ReadInt32(Console.ReadLine());
+            //Console.Write(a);
+           // SQLiteCommand sqlite_cmd;
+            SQLiteCommand VarQuery;
+            VarQuery = AnyConnectionObject.CreateCommand();
+
+            
+            //VarQuery.Parameters.Add(new SQLiteParameter("@param2", a));
+            //string abc = "INSERT INTO USER (Col1) values (@param1)";
+            //VarQuery.Parameters.AddWithValue("@param1", egtext);
+            //VarQuery.ExecuteNonQuery();
+            VarQuery.CommandText = "INSERT INTO SampleTable (Col1, Col2) VALUES(@param1, @param2)";
+            VarQuery.CommandType = System.Data.CommandType.Text;
+            VarQuery.Parameters.Add(new SQLiteParameter("@param1", egtext));
+            VarQuery.Parameters.Add(new SQLiteParameter("@param2",a));
+            VarQuery.ExecuteNonQuery();
+
+
+
+           // sqlite_cmd = conn.CreateCommand();
+           // sqlite_cmd.CommandText = "INSERT INTO SampleTable (Col1, Col2) VALUES('Test Text ', 1)"; 
+           //sqlite_cmd.ExecuteNonQuery();
+           // sqlite_cmd.CommandText = "INSERT INTO SampleTable(Col1, Col2) VALUES('Test1 Text1 ', 2); ";
+           //sqlite_cmd.ExecuteNonQuery();
+           // sqlite_cmd.CommandText = "INSERT INTO SampleTable (Col1, Col2) VALUES('Test2 Text2 ', 3); ";
+           //sqlite_cmd.ExecuteNonQuery();
+           // sqlite_cmd.CommandText = "INSERT INTO SampleTable (Col1, Col2) VALUES('Not a stupid value ', 4); ";
+           // sqlite_cmd.ExecuteNonQuery();
+
+
+           // sqlite_cmd.CommandText = "INSERT INTO SampleTable1(Col1, Col2) VALUES('Test3 Text3 ', 3); ";
+           //sqlite_cmd.ExecuteNonQuery();
+
+        }
+
+        static void ReadData(SQLiteConnection AnyConnectionObject)
+        {
+            SQLiteDataReader sqlite_datareader;
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = AnyConnectionObject.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT * FROM Pushups";
+
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            //string abc = "this is abc";
+            while (sqlite_datareader.Read())
+            {
+                CultureInfo enUS = new CultureInfo("en-US");
+                CultureInfo ci = CultureInfo.InvariantCulture;
+
+
+               
+                
+                
+                
+                
+                
+                //Display values from column 0 (the text)
+                Console.Write("Date: ");
+
+
+                // 12:23:45 AM
+                DateTime myreader = Convert.ToDateTime("13/3/1997");
+                string dateString = " 5/01/2009 8:30 AM";
+                //DateTime.TryParseExact(dateString, "DD/MM/YYYY hh:mm", enUS, System.Globalization.DateTimeStyles.None, out myreader);
+
+                // DateTime.ParseExact(sqlite_datareader.GetDateTime(0), "dd/mm/yyyy HH:MM:SS", CultureInfo.InvariantCulture);
+
+
+                //sqlite_datareader.
+                //dateString = (sqlite_datareader.GetDateTime(1)).ToString("dd/mm/yyyy hh:mm:ss");
+
+                myreader = sqlite_datareader.GetDateTime(1);
+                Console.WriteLine(myreader);
+
+              
+                
+                
+                //Display values from column 2 (reps of workout)
+                Console.Write("Repetitions: ");
+                double mydouble = sqlite_datareader.GetDouble(2);
+                Console.WriteLine(mydouble);
+
+
+                //Display values from column 3 (sets of workout)
+                Console.Write("Sets: ");
+                int mynumber = sqlite_datareader.GetInt32(3);
+                Console.WriteLine(mynumber);
+
+                
+                
+               
+            }
+
+            AnyConnectionObject.Close();
+            Console.ReadKey();
+        }
+
+        
+
+
+
+        static void L1andL2Prompt(ref int Choice1, ref int Choice2)
+        {
+            string FirstPrompt = "Add workout log to: \n1) Strengh Workout\n2) Cardio Workout\n3) Balance Workout\n4) Favourites/Recent ";
+            while (Choice1 == 0)
+            {
+                Console.WriteLine(FirstPrompt);
+                Choice1 = ReadInt32(Console.ReadLine());
+
+
+                switch (Choice1)
+                {
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine("1) Bodyweight Exercises\n2) Equipment Exercises");
+                            Choice2 = ReadInt32(Console.ReadLine());
+                        } while (Choice2 != 1 && Choice2 != 2);
+                        break;
+                    case 2:
+                        do
+                        {
+                            Console.WriteLine("1) Indoor\n2) Outdoor\n3)Other");
+                            Choice2 = ReadInt32(Console.ReadLine());
+                        } while (Choice2 != 1 && Choice2 != 2 && Choice2 != 3);
+                        break;
+                    case 3:
+
+                        do
+                        {
+                            Console.WriteLine("1) Standing on one foot\n2) Heel-to-toe walk");
+                            Choice2 = ReadInt32(Console.ReadLine());
+                        } while (Choice2 != 1 && Choice2 != 2);
+                        break;
+                    //case 4:
+                    //    break;
+                    default:
+                        Choice1 = 0;
+                        break;
+
+
+
+                }
+                Console.WriteLine(Choice1);
+
+
+            }
+        }
+
+        static void L3andL4Prompt(ref int Choice1, ref int Choice2, ref int Choice3, ref int Choice4)
+        {
+            if (Choice1 == 1)
+            {
+                string BodyweightExercises = "1) Push-ups\n2) Pull-ups\n3) Sit-ups";
+                string EquipmentTypeExercises = "1) Barbell\n2) Dumbbell";
+
+                switch (Choice2)
+                {
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine(BodyweightExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                        } while (Choice3 != 1 && Choice3 != 2 && Choice3 != 3);
+                        break;
+                    case 2:
+
+                        do
+                        {
+                            Console.WriteLine(EquipmentTypeExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                        } while (Choice3 != 1 && Choice3 != 2);
+
+                        string BarbellExercises = "1) Benchpress\n2) Bent-over-row\n3) Deadlift\n4) Backsquat\n5) Overhead press\n6) Powerclean\n";
+                        string DumbbellExercises = "1)Split squat\n2) Lateral raise\n3) Biceps curl\n4) Lunge\n5) Overhead press\n6) Chest flye\n7) Bent-over-row\n8) Chest-pull-over\n9) Front squat\n";
+
+
+                        if (Choice3 == 1)
+                        {
+                            do
+                            {
+                                Console.WriteLine(BarbellExercises);
+                                Choice4 = ReadInt32(Console.ReadLine());
+                            } while (((6 - Choice4) < 0) || ((6 - Choice4) > 5));
+                        }
+
+                        if (Choice3 == 2)
+                        {
+                            do
+                            {
+                                Console.WriteLine(DumbbellExercises);
+                                Choice4 = ReadInt32(Console.ReadLine());
+                            } while (((9 - Choice4) < 0) || ((9 - Choice4) > 8));
+
+                        }
+
+                        break;
+
+                }
+
+
+
+
+
+            }
+
+
+
+
+            if (Choice1 == 2)
+            {
+                string IndoorExercises = "1) Elliptical trainer\n2) Indoor bicycle\n3) Treadmill";
+                string OutdoorExercises = "1) Walking\n2) Cycling\n3) Running";
+                string OtherExercises = "1) Swimming\n2) Jump rope";
+
+                switch (Choice2)
+                {
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine(IndoorExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                        } while (Choice3 != 1 && Choice3 != 2 && Choice3 != 3);
+
+                        string EllipticalTrainerExercises = "1) Custom settings\n2) Preset";
+
+
+                        if (Choice3 == 1)
+                        {
+                            do
+                            {
+                                Console.WriteLine(EllipticalTrainerExercises);
+                                Choice4 = ReadInt32(Console.ReadLine());
+                            } while (((2 - Choice4) < 0) || ((2 - Choice4) > 1));
+                        }
+
+                        break;
+
+                    case 2:
+
+                        do
+                        {
+                            Console.WriteLine(OutdoorExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                        } while (Choice3 != 1 && Choice3 != 2 && Choice3 != 3);
+
+
+                        break;
+
+
+                    case 3:
+                        do
+                        {
+                            Console.WriteLine(OtherExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                        } while (Choice3 != 1 && Choice3 != 2);
+
+                        break;
+                }
+
+
+
+
+
+            }
+        }
+
+    }
+}

@@ -1,0 +1,35 @@
+->Date, Repetitions, Sets
+pushup(111), pullup(112), sit up(113)
+
+
+
+->Date, Weight, Repetitions, Sets
+	Barbell
+(121 1-5)
+Benchpress
+Bent-over-row
+Deadlift
+Backsquat
+Overhead Press
+
+
+	DumbBell
+(122 2-9)
+LateralRaise
+BicepsCurl
+Lunge
+OverheadPress
+ChestFlye
+Bent-over-row
+CHest-pull-over
+FrontSquat
+
+->Date, weight, sets
+	Barbell
+(1216)
+PowerClean
+
+->Date, Front Leg, Weight, Repetitions, Sets
+	DumbBell
+(1221)
+SplitSquat

@@ -1,0 +1,14 @@
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\FitnessWorkoutLogger.exe.config
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\FitnessWorkoutLogger.exe
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\FitnessWorkoutLogger.pdb
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\EntityFramework.dll
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\System.Data.SQLite.dll
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\System.Data.SQLite.EF6.dll
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\System.Data.SQLite.Linq.dll
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\EntityFramework.xml
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\System.Data.SQLite.xml
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.csprojResolveAssemblyReference.cache
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.exe
+c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.pdb

@@ -1,0 +1,593 @@
+
+//https://www.codeguru.com/csharp/.net/net_data/using-sqlite-in-a-c-application.html
+using System;
+using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace SQLiteDemo
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            int Choice1 = 0;
+            int Choice2 = 0;
+
+            L1andL2Prompt(ref Choice1, ref Choice2);
+
+            int Choice3 = 0;
+            int Choice4 = 0;
+
+            L3andL4Prompt(ref Choice1, ref Choice2, ref Choice3, ref Choice4);
+
+            string WorkoutType = null;
+
+
+           
+            
+
+
+            if (Choice1 == 1)
+            {
+                SQLiteConnection sqlite_conn_strength;
+                sqlite_conn_strength = new SQLiteConnection("Data Source=StrengthDB.db; Version = 3; New = True; Compress = True; ");
+                sqlite_conn_strength.Open();
+                WorkoutType = "Strength";
+                CreateTable(sqlite_conn_strength);
+          
+
+                if (Choice2 == 1)
+                {
+                   // string DateEntry = null;
+                   // double RepEntry = 0;
+                   // int SetsEntry = 0;
+
+                   // Console.Write("Please enter the date: ");
+                   //DateEntry =  Console.ReadLine();
+
+
+                   // Console.Write("Please enter the number of repetitions: ");
+                   // RepEntry = ReadInt32(Console.ReadLine());
+
+                   // Console.Write("Please enter the number of sets: ");
+                   // SetsEntry = ReadInt32(Console.ReadLine());
+                    InsertData(sqlite_conn_strength, ref Choice3);
+                    ReadData(sqlite_conn_strength, WorkoutType, ref Choice3);
+
+
+
+
+
+
+
+
+                }
+
+
+
+                //ReadData(sqlite_conn_strength, WorkoutType);
+            }
+
+
+            if (Choice1 == 2)
+            {
+                SQLiteConnection sqlite_conn_cardio;
+                sqlite_conn_cardio = new SQLiteConnection("Data Source=CardioDB.db; Version = 3; New = True; Compress = True; ");
+                sqlite_conn_cardio.Open();
+                WorkoutType = "Cardio";
+                CreateTable(sqlite_conn_cardio);
+            }
+
+            if (Choice1 == 3)
+            {
+                SQLiteConnection sqlite_conn_balance;
+                sqlite_conn_balance = new SQLiteConnection("Data Source=BalanceDB.db; Version = 3; New = True; Compress = True; ");
+                sqlite_conn_balance.Open();
+                WorkoutType = "Balance";
+                CreateTable(sqlite_conn_balance);
+            }
+
+
+
+
+
+
+
+
+
+
+            //InsertData(sqlite_conn_strength);
+            //ReadData(sqlite_conn_strength);
+
+
+            //InsertData(sqlite_conn_cardio);
+            //ReadData(sqlite_conn_cardio);
+
+
+
+
+
+        }
+
+    
+
+        static void CreateTable(SQLiteConnection AnyConnectionObject)
+        {
+
+            
+
+
+
+
+            string Createsql = "DROP TABLE if exists Pushups";
+            SQLiteCommand sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            //sqlite_cmd.ExecuteNonQuery();
+            //----------------------------------------------------------------------------------STRENGTH---------------------------------------------------------------------
+            //-----------------------Strength->Bodyweight
+            Createsql = "CREATE TABLE if not exists Pushups(PSUNum INTEGER PRIMARY KEY, Date DATE, Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+            Createsql = "CREATE TABLE if not exists Pullups(PLUNum INTEGER PRIMARY KEY, Date DATE, Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists Situps(STUNum INTEGER PRIMARY KEY, Date DATE, Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+
+
+            //--------------Strength->Equipment->barbell--------------------------------------------------------------
+            Createsql = "CREATE TABLE if not exists BarbellBenchPress(BBPNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists BarbellBentOverRow(BORNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists BarbellDeadlift(BDLNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists BarbellBacksquat(BBSNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists BarbellOverheadPress(BOPNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists BarbellPowerClean(BPCNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+
+            //Strength->equipment->dumbbell
+            Createsql = "CREATE TABLE if not exists DumbbellSplitSquat(DBSSNum INTEGER PRIMARY KEY, FrontLeg VARCHAR(10), Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists DumbbellLateralRaise(DBLRNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists DumbbellBicepsCurl(DBBCNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists DumbbellLunge(DBLNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists DumbbellOverheadPress(DBOPNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists DumbbellChestFlye(DBCFNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists DumbbellBentOverRow(DBORNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists DumbbellChestPullOver(DBCPONum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists DumbbellFrontSquat(DBFSNum INTEGER PRIMARY KEY, Date DATE, Weight DECIMAL(3,1), Repetitions DECIMAL(3,1), Sets INT)";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+
+            //----------------------------------------------------------------------------Cardio----------------------------------------------------------------------------------
+            //Cardio->Indoor->Elliptical trainer
+
+
+            Createsql = "CREATE TABLE if not exists EllipticalCustom(EC INTEGER PRIMARY KEY, Date DATE, Resistance VARCHAR(20), RampControl VARCHAR(20), StepsPerMin DECIMAL(4, 1))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+
+
+            Createsql = "CREATE TABLE if not exists EllipticalPreset(EP INTEGER PRIMARY KEY, Date DATE, Setting VARCHAR(20), Time VARCHAR(20), Distance VARCHAR(4, 1))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+
+
+            //Cardio->Indoor->Indoor bicycle
+
+            Createsql = "CREATE TABLE if not exists IndoorBicycle(IB INTEGER PRIMARY KEY, Date DATE, Resistance VARCHAR(20), LengthOfTime VARCHAR(20), RevolutionsPerMinute DECIMAL(4,1))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            //Cardio->Indoor->Treadmill
+
+            Createsql = "CREATE TABLE if not exists Treadmill(TMILL INTEGER PRIMARY KEY, Date DATE, Speed VARCHAR(20), Incline VARCHAR(20), Time VARCHAR(20))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+            //Cardio->Outdoor
+
+            Createsql = "CREATE TABLE if not exists Walking(WALK INTEGER PRIMARY KEY, Date DATE, Distance VARCHAR(20), Time VARCHAR(20))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists Cycling(CYC INTEGER PRIMARY KEY, Date DATE, Distance VARCHAR(20), Time VARCHAR(20))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+            Createsql = "CREATE TABLE if not exists Running(RUN INTEGER PRIMARY KEY, Date DATE, Distance VARCHAR(20), Time VARCHAR(20))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+            //Cardio->Other
+
+            Createsql = "CREATE TABLE if not exists Swimming(SWIM INTEGER PRIMARY KEY, Date DATE, Laps DECIMAL(5,2), Time VARCHAR(20))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+            Createsql = "CREATE TABLE if not exists JumpRope(JR INTEGER PRIMARY KEY, Date DATE, Revolutions Decimal(6, 2), Time VARCHAR(20), JumpType VARCHAR(20))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+
+            //-------------------------------------------------------------------------------Balance--------------------------------------------------------------------------
+
+
+            Createsql = "CREATE TABLE if not exists StandingOnOneFoot(SOOF INTEGER PRIMARY KEY, Date DATE, LegRaisedToFront VARCHAR(10), Time VARCHAR(20))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+            Createsql = "CREATE TABLE if not exists HeelToToeWalk(HTTW INTEGER PRIMARY KEY, Date DATE, Time VARCHAR(20), Steps DECIMAL(6,2))";
+            sqlite_cmd = new SQLiteCommand(Createsql, AnyConnectionObject);
+            sqlite_cmd.ExecuteNonQuery();
+
+
+
+
+
+
+            //SQLiteCommand VarQuery;
+            ////// VarQuery = AnyConnectionObject.CreateCommand();
+            //Createsql = "INSERT INTO Pushups values(1, datetime('now', 'localtime'), 3.5, 4)";
+            //VarQuery = new SQLiteCommand(Createsql, AnyConnectionObject);
+            //VarQuery.ExecuteNonQuery();
+
+
+
+
+        }
+
+        public static int ReadInt32(string value)
+        {
+            int val = -1;
+            if (!int.TryParse(value, out val))
+                return -1;
+            return val;
+        }
+
+
+
+
+
+
+        static void InsertData(SQLiteConnection AnyConnectionObject, ref int Choice3 )
+        {
+
+            
+
+            
+            Console.Write("Enter value for Repetitons: ");
+            double Repetitions = Convert.ToDouble(Console.ReadLine());
+            
+            Console.Write("Enter value for Sets: ");
+            int Sets = ReadInt32(Console.ReadLine());
+
+            //Console.Write(a);
+            // SQLiteCommand sqlite_cmd;
+            SQLiteCommand VarQuery;
+            VarQuery = AnyConnectionObject.CreateCommand();
+
+            string ChooseTable = null;
+
+            if( Choice3 == 1)
+            {
+                ChooseTable = "Pushups";
+
+            }else if (Choice3 == 2)
+            {
+                ChooseTable = "Pullups";
+            }else if (Choice3 == 3)
+            {
+                ChooseTable = "Situps";
+            }
+
+
+
+           
+
+
+            VarQuery.CommandText = "INSERT INTO " + ChooseTable + " (Date, Repetitions, Sets) VALUES(datetime('now', 'localtime'), @param1, @param2)";
+           VarQuery.CommandType = System.Data.CommandType.Text;
+           
+            
+            VarQuery.Parameters.Add(new SQLiteParameter("@param1", Repetitions));
+            VarQuery.Parameters.Add(new SQLiteParameter("@param2", Sets));
+            VarQuery.ExecuteNonQuery();
+
+
+
+        }
+
+        static void ReadData(SQLiteConnection AnyConnectionObject, string WorkoutType, ref int Choice3)
+        {
+            SQLiteDataReader sqlite_datareader;
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = AnyConnectionObject.CreateCommand();
+            string ChooseTable = null;
+
+            if (Choice3 == 1)
+            {
+                ChooseTable = "Pushups";
+
+            }
+            else if (Choice3 == 2)
+            {
+                ChooseTable = "Pullups";
+            }
+            else if (Choice3 == 3)
+            {
+                ChooseTable = "Situps";
+            }
+            sqlite_cmd.CommandText = "SELECT * FROM " + ChooseTable;
+
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+           
+            SQLiteCommand ColumnName;
+            ColumnName = "Select "
+            SQLiteDataReader ColName = 
+
+            while (sqlite_datareader.Read() && WorkoutType == "Strength")
+            {
+                //Display values from column 1 (the date and time)
+                Console.Write("PSUNum: ");
+                int PSUNum = 0; 
+                PSUNum = sqlite_datareader.GetInt32(0);
+                Console.WriteLine(PSUNum);
+
+                //Display values from column 1 (the date and time)
+                Console.Write("Date: ");
+
+                DateTime myreader = sqlite_datareader.GetDateTime(1);
+                Console.WriteLine(myreader);
+
+                //Display values from column 2 (reps of workout)
+                Console.Write("Repetitions: ");
+                double mydouble = sqlite_datareader.GetDouble(2);
+                Console.WriteLine(mydouble);
+
+
+                //Display values from column 3 (sets of workout)
+                Console.Write("Sets: ");
+                int mynumber = sqlite_datareader.GetInt32(3);
+                Console.WriteLine(mynumber);
+            }
+
+            AnyConnectionObject.Close();
+            Console.ReadKey();
+        }
+
+
+
+
+
+        static void L1andL2Prompt(ref int Choice1, ref int Choice2)
+        {
+            string FirstPrompt = "Add workout log to: \n1) Strengh Workout\n2) Cardio Workout\n3) Balance Workout\n4) Favourites/Recent ";
+            while (Choice1 == 0)
+            {
+                Console.WriteLine(FirstPrompt);
+                Choice1 = ReadInt32(Console.ReadLine());
+
+
+                switch (Choice1)
+                {
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine("1) Bodyweight Exercises\n2) Equipment Exercises");
+                            Choice2 = ReadInt32(Console.ReadLine());
+                        } while (Choice2 != 1 && Choice2 != 2);
+                        break;
+                    case 2:
+                        do
+                        {
+                            Console.WriteLine("1) Indoor\n2) Outdoor\n3)Other");
+                            Choice2 = ReadInt32(Console.ReadLine());
+                        } while (Choice2 != 1 && Choice2 != 2 && Choice2 != 3);
+                        break;
+                    case 3:
+
+                        do
+                        {
+                            Console.WriteLine("1) Standing on one foot\n2) Heel-to-toe walk");
+                            Choice2 = ReadInt32(Console.ReadLine());
+                        } while (Choice2 != 1 && Choice2 != 2);
+                        break;
+                    //case 4:
+                    //    break;
+                    default:
+                        Choice1 = 0;
+                        break;
+
+
+
+                }
+                Console.WriteLine(Choice1);
+
+
+            }
+        }
+
+        static void L3andL4Prompt(ref int Choice1, ref int Choice2, ref int Choice3, ref int Choice4)
+        {
+            if (Choice1 == 1)
+            {
+                string BodyweightExercises = "1) Push-ups\n2) Pull-ups\n3) Sit-ups";
+                string EquipmentTypeExercises = "1) Barbell\n2) Dumbbell";
+
+                switch (Choice2)
+                {
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine(BodyweightExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                            Choice4 = 0;
+                        } while (Choice3 != 1 && Choice3 != 2 && Choice3 != 3);
+                        break;
+                    case 2:
+
+                        do
+                        {
+                            Console.WriteLine(EquipmentTypeExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                        } while (Choice3 != 1 && Choice3 != 2);
+
+                        string BarbellExercises = "1) Benchpress\n2) Bent-over-row\n3) Deadlift\n4) Backsquat\n5) Overhead press\n6) Powerclean\n";
+                        string DumbbellExercises = "1)Split squat\n2) Lateral raise\n3) Biceps curl\n4) Lunge\n5) Overhead press\n6) Chest flye\n7) Bent-over-row\n8) Chest-pull-over\n9) Front squat\n";
+
+
+                        if (Choice3 == 1)
+                        {
+                            do
+                            {
+                                Console.WriteLine(BarbellExercises);
+                                Choice4 = ReadInt32(Console.ReadLine());
+                            } while (((6 - Choice4) < 0) || ((6 - Choice4) > 5));
+                        }
+
+                        if (Choice3 == 2)
+                        {
+                            do
+                            {
+                                Console.WriteLine(DumbbellExercises);
+                                Choice4 = ReadInt32(Console.ReadLine());
+                            } while (((9 - Choice4) < 0) || ((9 - Choice4) > 8));
+
+                        }
+
+                        break;
+
+                }
+
+
+
+
+
+            }
+
+
+
+
+            if (Choice1 == 2)
+            {
+                string IndoorExercises = "1) Elliptical trainer\n2) Indoor bicycle\n3) Treadmill";
+                string OutdoorExercises = "1) Walking\n2) Cycling\n3) Running";
+                string OtherExercises = "1) Swimming\n2) Jump rope";
+
+                switch (Choice2)
+                {
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine(IndoorExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                        } while (Choice3 != 1 && Choice3 != 2 && Choice3 != 3);
+
+                        string EllipticalTrainerExercises = "1) Custom settings\n2) Preset";
+
+
+                        if (Choice3 == 1)
+                        {
+                            do
+                            {
+                                Console.WriteLine(EllipticalTrainerExercises);
+                                Choice4 = ReadInt32(Console.ReadLine());
+                            } while (((2 - Choice4) < 0) || ((2 - Choice4) > 1));
+                        }
+
+                        break;
+
+                    case 2:
+
+                        do
+                        {
+                            Console.WriteLine(OutdoorExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                        } while (Choice3 != 1 && Choice3 != 2 && Choice3 != 3);
+
+
+                        break;
+
+
+                    case 3:
+                        do
+                        {
+                            Console.WriteLine(OtherExercises);
+                            Choice3 = ReadInt32(Console.ReadLine());
+                        } while (Choice3 != 1 && Choice3 != 2);
+
+                        break;
+                }
+
+
+
+
+
+            }
+        }
+
+    }
+}
