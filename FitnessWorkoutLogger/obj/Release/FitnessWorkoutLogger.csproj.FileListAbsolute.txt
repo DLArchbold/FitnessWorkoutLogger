@@ -1,0 +1,14 @@
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\FitnessWorkoutLogger.exe.config
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\FitnessWorkoutLogger.exe
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\FitnessWorkoutLogger.pdb
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\EntityFramework.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\System.Data.SQLite.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\System.Data.SQLite.EF6.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\System.Data.SQLite.Linq.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\EntityFramework.xml
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Release\System.Data.SQLite.xml
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Release\FitnessWorkoutLogger.csprojResolveAssemblyReference.cache
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Release\FitnessWorkoutLogger.exe
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Release\FitnessWorkoutLogger.pdb

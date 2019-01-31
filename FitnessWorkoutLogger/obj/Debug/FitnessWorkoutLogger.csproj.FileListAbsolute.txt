@@ -12,3 +12,21 @@ c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWo
 c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.csprojResolveAssemblyReference.cache
 c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.exe
 c:\users\wj\documents\visual studio 2015\Projects\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.pdb
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\FitnessWorkoutLogger.exe.config
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.exe
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.pdb
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\FitnessWorkoutLogger.exe
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\FitnessWorkoutLogger.pdb
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\EntityFramework.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\System.Data.SQLite.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\EntityFramework.xml
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\System.Data.SQLite.xml
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.csprojResolveAssemblyReference.cache
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\FitnessWorkoutLogger.exe.manifest
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\bin\Debug\FitnessWorkoutLogger.application
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.exe.manifest
+C:\Users\WJ\Documents\FitnessWorkoutLogger\FitnessWorkoutLogger\obj\Debug\FitnessWorkoutLogger.application
